@@ -34,4 +34,26 @@ public class Tests
         Assert.That(ResultTask.GetTitle, Is.EqualTo(Title));
     }
 
+    /*
+     * Given that I add multiple tasks
+     * Then the taskService must keep track of all added tasks
+     */
+
+    [Test]
+    public void AddingMultipleTasksTest()
+    {
+        // Arrange
+        for(int x = 1; x < 4; x++)
+        {   
+            Service.AddTask(x, $"Task{x}");
+        }
+
+        // Act
+        List<TaskItem> Result = Service.GetAllTasks();
+
+        //Assert
+        Assert.True(Result.Count().Equals(3));
+
+        
+    }
 }
