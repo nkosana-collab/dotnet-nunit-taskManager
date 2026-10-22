@@ -2,16 +2,8 @@ using TaskManager;
 
 namespace TaskManagerTests;
 
-public class Tests
+public class TaskServiceTests : BaseTaskServiceTest
 {
-    private TaskService Service;
-    
-    [SetUp]
-    public void Setup()
-    {
-        Service = new TaskService();
-    }
-
 
     /*
      * Given that I have a valid task, 
@@ -83,6 +75,8 @@ public class Tests
         Assert.Throws<ArgumentException>(() => Service.GetTaskById(TaskId));
         
     }
+
+
 
     /*
      * Given that I have completed a certain task
