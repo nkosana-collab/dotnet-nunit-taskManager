@@ -34,6 +34,8 @@ public class Tests
         Assert.That(ResultTask.GetTitle, Is.EqualTo(Title));
     }
 
+
+
     /*
      * Given that I add multiple tasks
      * Then the taskService must keep track of all added tasks
@@ -53,7 +55,32 @@ public class Tests
 
         //Assert
         Assert.True(Result.Count().Equals(3));
+    }
 
+
+
+    /*
+     * Given that I have added a task successfully.
+     * Whe I want to delete the task--
+     * Then I should be able to do so.
+     */
+    [Test]
+    public void DeleteTaskTest()
+    {
+        // Arrange
+        int TaskId = 7;
+        string Title = "They Cry";
+
+        // Act
+        Service.AddTask(TaskId, Title);
+        TaskItem ResultTask = Service.GetTaskById(TaskId);
+        Assert.That(ResultTask.GetId(), Is.EqualTo(TaskId));
+        Assert.That(ResultTask.GetTitle(), Is.EqualTo(Title));
+
+        Service.DeleteTask(TaskId);
+
+        // Assert
+        Assert.Throws<ArgumentException>(() => Service.GetTaskById(TaskId));
         
     }
 }
