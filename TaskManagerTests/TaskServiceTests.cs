@@ -83,4 +83,26 @@ public class Tests
         Assert.Throws<ArgumentException>(() => Service.GetTaskById(TaskId));
         
     }
+
+    /*
+     * Given that I have completed a certain task
+     * When I notify the TaskService--
+     * Then It should update the task completion status
+     */
+     [Test]
+     public void CompletedTaskStatusUpdateTest()
+    {
+        // Arrange
+        int TaskId = 11;
+        string Title = "When They See Us";
+        
+        Service.AddTask(TaskId, Title);
+        Assert.False(Service.GetTaskById(TaskId).Completed());
+
+        // Act
+        Service.GetTaskById(TaskId).Complete();
+
+        // Asssert
+        Assert.True(Service.GetTaskById(TaskId).Completed());
+    }
 }
