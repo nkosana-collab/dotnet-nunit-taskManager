@@ -99,4 +99,30 @@ public class TaskServiceTests : BaseTaskServiceTest
         // Asssert
         Assert.True(Service.GetTaskById(TaskId).Completed());
     }
+
+    
+
+
+
+    private static List<string> ValidTitles = new List<string>() {"Hey this is fun",
+                                                                  "Hey this is just fun",
+                                                                  "I just might who knows"};
+    /*
+     * Given that title update is a valid string,
+     * When you update the current title--
+     * Then TaskService must update the title.
+     */
+    [TestCaseSource(nameof(ValidTitles))]
+    public void TaskServiceUpdatesTitleSuccessfully(string validTitle)
+    {
+        // Arrange
+        Service.AddTask(1,"Task uno");
+
+        // Act
+        Service.UpdateTaskTitle(1, validTitle);
+
+        // Assert
+        Assert.That(Service.GetTaskById(1).GetTitle(), Is.EqualTo(validTitle));
+    }
+
 }
